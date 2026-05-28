@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Prep — Planning Optimisé</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #111118;
+  --bg3: #18181f;
+  --bg4: #1e1e28;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #f0f0f5;
+  --text2: #9090a0;
+  --text3: #5a5a6a;
+  --accent: #6c63ff;
+  --accent2: #a594ff;
+  --gold: #f5c542;
+  --gold2: #ffd97a;
+  --green: #3ecf8e;
+  --green2: #7ef5c0;
+  --red: #ff4f6a;
+  --blue: #4db8ff;
+  --orange: #ff8c42;
+
+  --elec: #4db8ff;
+  --fluides: #3ecf8e;
+  --bureau: #a594ff;
+  --stats: #f5c542;
+  --metal: #ff8c42;
+  --java: #3ecf8e;
+  --ro: #ff8c42;
+  --compo: #ff6b9d;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+/* LAYOUT */
+.app { display: flex; height: 100vh; overflow: hidden; }
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transition: width 0.3s;
+}
+
+.sidebar-logo {
+  padding: 20px 18px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text);
+  letter-spacing: -0.5px;
+}
+
+.logo-sub {
+  font-size: 10px;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+  margin-top: 2px;
+  letter-spacing: 0.05em;
+}
+
+.nav-section {
+  padding: 12px 10px;
+  flex: 1;
+}
+
+.nav-label {
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0 8px 6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text2);
+  font-size: 13px;
+  transition: all 0.15s;
+  margin-bottom: 2px;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.nav-item:hover { background: var(--bg3); color: var(--text); }
+.nav-item.active { background: rgba(108,99,255,0.15); color: var(--accent2); }
+.nav-item .icon { font-size: 16px; flex-shrink: 0; }
+
+.sidebar-bottom {
+  padding: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.progress-overall {
+  background: var(--bg3);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.prog-label { font-size: 11px; color: var(--text2); margin-bottom: 6px; }
+.prog-bar-wrap { background: var(--bg4); border-radius: 4px; height: 5px; overflow: hidden; }
+.prog-bar { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.5s; }
+.prog-pct { font-family: 'DM Mono', monospace; font-size: 18px; font-weight: 500; color: var(--text); margin-top: 6px; }
+
+/* MAIN */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+/* TOP BAR */
+.topbar {
+  height: 52px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.topbar-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  flex: 1;
+}
+
+.topbar-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+  background: var(--bg3);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.btn {
+  padding: 6px 14px;
+  border-radius: 7px;
+  border: 1px solid var(--border2);
+  background: var(--bg3);
+  color: var(--text2);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.btn:hover { background: var(--bg4); color: var(--text); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: white; }
+.btn.primary:hover { background: var(--accent2); }
+
+/* CONTENT */
+.content { flex: 1; overflow-y: auto; padding: 20px; }
+
+/* VIEWS */
+.view { display: none; animation: fadeIn 0.2s ease; }
+.view.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* STATS GRID */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent-color, var(--accent));
+}
+
+.stat-label { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; letter-spacing: 0.05em; }
+.stat-value { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 700; margin: 6px 0 2px; }
+.stat-sub { font-size: 11px; color: var(--text2); }
+
+/* PLANNING TABLE */
+.planning-section { margin-bottom: 24px; }
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.section-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid;
+}
+
+.badge-prep { background: rgba(108,99,255,0.1); border-color: rgba(108,99,255,0.3); color: var(--accent2); }
+.badge-exam { background: rgba(255,79,106,0.1); border-color: rgba(255,79,106,0.3); color: #ff6b80; }
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* DAY CARD */
+.day-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.day-card:hover { border-color: var(--border2); }
+
+.day-card.exam-day { border-color: rgba(255,79,106,0.3); }
+.day-card.exam-day .day-header { background: rgba(255,79,106,0.05); }
+.day-card.free-day { border-color: rgba(62,207,142,0.3); }
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.day-header:hover { background: var(--bg3); }
+
+.day-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  min-width: 32px;
+  line-height: 1;
+}
+
+.day-meta { flex: 1; }
+.day-name { font-size: 13px; font-weight: 500; }
+.day-subjects { font-size: 11px; color: var(--text3); margin-top: 1px; }
+
+.day-badges { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.subj-badge {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid;
+  font-family: 'DM Mono', monospace;
+  white-space: nowrap;
+}
+
+.day-progress {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.day-done-count { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; }
+
+.day-toggle {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text3);
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+
+.day-card.open .day-toggle { transform: rotate(180deg); }
+
+/* SLOTS */
+.day-slots {
+  display: none;
+  border-top: 1px solid var(--border);
+}
+
+.day-card.open .day-slots { display: block; }
+
+.slot-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.slot-row:last-child { border-bottom: none; }
+.slot-row:hover { background: var(--bg3); }
+.slot-row.done { opacity: 0.45; }
+.slot-row.break-row { opacity: 0.5; pointer-events: none; }
+
+.slot-check {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--border2);
+  border-radius: 5px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: all 0.15s;
+  color: transparent;
+}
+
+.slot-row.done .slot-check {
+  background: var(--green);
+  border-color: var(--green);
+  color: #0a0a0f;
+}
+
+.slot-time {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+  min-width: 80px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.slot-info { flex: 1; }
+.slot-task { font-size: 13px; font-weight: 500; }
+.slot-detail { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.slot-tag {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid;
+  font-family: 'DM Mono', monospace;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* SUBJECT COLORS */
+.c-elec { color: var(--elec); border-color: rgba(77,184,255,0.3); background: rgba(77,184,255,0.08); }
+.c-fluides { color: var(--fluides); border-color: rgba(62,207,142,0.3); background: rgba(62,207,142,0.08); }
+.c-bureau { color: var(--bureau); border-color: rgba(165,148,255,0.3); background: rgba(165,148,255,0.08); }
+.c-stats { color: var(--stats); border-color: rgba(245,197,66,0.3); background: rgba(245,197,66,0.08); }
+.c-metal { color: var(--metal); border-color: rgba(255,140,66,0.3); background: rgba(255,140,66,0.08); }
+.c-java { color: #50fa7b; border-color: rgba(80,250,123,0.3); background: rgba(80,250,123,0.08); }
+.c-ro { color: #ffb347; border-color: rgba(255,179,71,0.3); background: rgba(255,179,71,0.08); }
+.c-compo { color: var(--compo); border-color: rgba(255,107,157,0.3); background: rgba(255,107,157,0.08); }
+.c-break { color: var(--text3); border-color: var(--border); background: transparent; }
+.c-exam { color: var(--red); border-color: rgba(255,79,106,0.3); background: rgba(255,79,106,0.08); }
+
+/* MATIÈRES VIEW */
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.subject-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.subject-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+}
+
+.subject-card:hover { border-color: var(--border2); transform: translateY(-1px); }
+
+.subj-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+.subj-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; }
+.subj-type { font-size: 10px; color: var(--text3); margin-top: 2px; }
+.subj-priority { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; opacity: 0.3; }
+
+.subj-progress-wrap { margin-bottom: 10px; }
+.subj-prog-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--text3); margin-bottom: 5px; }
+.subj-prog-pct { font-family: 'DM Mono', monospace; }
+.subj-prog-bar { height: 4px; background: var(--bg4); border-radius: 2px; overflow: hidden; }
+.subj-prog-fill { height: 100%; border-radius: 2px; transition: width 0.5s; }
+
+.subj-stats { display: flex; gap: 12px; }
+.subj-stat { text-align: center; }
+.subj-stat-val { font-family: 'DM Mono', monospace; font-size: 16px; font-weight: 500; }
+.subj-stat-label { font-size: 10px; color: var(--text3); }
+
+.subj-exam-date {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text3);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* TIMER VIEW */
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+}
+
+.timer-subject-select {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.timer-subj-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text2);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.timer-subj-btn:hover { border-color: var(--border2); color: var(--text); }
+.timer-subj-btn.active { border-color: var(--accent); background: rgba(108,99,255,0.15); color: var(--accent2); }
+
+.timer-display {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  margin-bottom: 30px;
+}
+
+.timer-svg { transform: rotate(-90deg); }
+
+.timer-ring-bg { fill: none; stroke: var(--bg4); stroke-width: 8; }
+.timer-ring { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 1s linear; }
+
+.timer-text-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-time {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 48px;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+.timer-mode {
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+.timer-controls { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; }
+
+.timer-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  background: var(--bg2);
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.timer-btn:hover { background: var(--bg3); }
+.timer-btn.main-btn { width: 60px; height: 60px; background: var(--accent); border-color: var(--accent); font-size: 22px; }
+.timer-btn.main-btn:hover { background: var(--accent2); }
+
+.timer-presets { display: flex; gap: 8px; }
+.timer-preset {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text2);
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  transition: all 0.15s;
+}
+
+.timer-preset:hover, .timer-preset.active { border-color: var(--accent); color: var(--accent2); background: rgba(108,99,255,0.1); }
+
+.timer-sessions {
+  width: 100%;
+  max-width: 500px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+.session-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); }
+.session-row:last-child { border: none; }
+.session-subj { font-size: 12px; font-weight: 500; }
+.session-time { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text3); }
+
+/* FICHES VIEW */
+.fiches-layout { display: grid; grid-template-columns: 240px 1fr; gap: 16px; }
+
+.fiches-sidebar {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.fiches-subj-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.fiches-subj-item:hover { background: var(--bg3); }
+.fiches-subj-item.active { background: var(--bg4); }
+.fiches-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.fiches-subj-name { font-size: 13px; flex: 1; }
+.fiches-count { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3); }
+
+.fiches-main { display: flex; flex-direction: column; gap: 12px; }
+
+.fiche-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.fiche-card:hover { border-color: var(--border2); }
+
+.fiche-front {
+  padding: 16px;
+}
+
+.fiche-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  margin-bottom: 8px;
+}
+
+.fiche-question {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.fiche-reveal-btn {
+  font-size: 11px;
+  color: var(--accent2);
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+}
+
+.fiche-answer {
+  padding: 0 16px;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.fiche-card.revealed .fiche-answer {
+  max-height: 500px;
+  padding: 0 16px 16px;
+}
+
+.fiche-answer-content {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text2);
+  white-space: pre-line;
+}
+
+.fiche-answer-content .formula {
+  font-family: 'DM Mono', monospace;
+  background: var(--bg4);
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 8px 0;
+  border-left: 2px solid var(--accent);
+  font-size: 12px;
+  display: block;
+}
+
+.fiche-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.fiche-btn {
+  flex: 1;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+
+.fiche-btn.ok { color: var(--green); border-color: rgba(62,207,142,0.3); }
+.fiche-btn.ok:hover { background: rgba(62,207,142,0.1); }
+.fiche-btn.nok { color: var(--red); border-color: rgba(255,79,106,0.3); }
+.fiche-btn.nok:hover { background: rgba(255,79,106,0.1); }
+
+.add-fiche-form {
+  background: var(--bg2);
+  border: 1px dashed var(--border2);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.form-row { margin-bottom: 10px; }
+.form-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; font-family: 'DM Mono', monospace; }
+.form-input {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 8px 11px;
+  color: var(--text);
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.form-input:focus { border-color: var(--accent); }
+textarea.form-input { min-height: 80px; resize: vertical; }
+
+select.form-input option { background: var(--bg3); }
+
+/* NOTES VIEW */
+.notes-layout { display: grid; grid-template-columns: 220px 1fr; gap: 16px; height: calc(100vh - 92px); }
+
+.notes-list {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.notes-list-header {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.note-item {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.note-item:hover { background: var(--bg3); }
+.note-item.active { background: var(--bg4); }
+
+.note-item-title { font-size: 12px; font-weight: 500; margin-bottom: 3px; }
+.note-item-preview { font-size: 11px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.note-item-date { font-size: 10px; color: var(--text3); font-family: 'DM Mono', monospace; margin-top: 3px; }
+
+.note-editor {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.note-editor-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.note-title-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  outline: none;
+}
+
+.note-body-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  padding: 16px;
+  outline: none;
+  resize: none;
+}
+
+/* COUNTDOWN */
+.countdown-banner {
+  background: linear-gradient(90deg, rgba(108,99,255,0.1), rgba(255,79,106,0.1));
+  border: 1px solid rgba(108,99,255,0.2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.countdown-item { text-align: center; }
+.countdown-val { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; line-height: 1; }
+.countdown-label { font-size: 10px; color: var(--text3); font-family: 'DM Mono', monospace; }
+.countdown-sep { font-size: 24px; color: var(--text3); font-weight: 300; margin-top: -4px; }
+.countdown-text { font-size: 12px; color: var(--text2); margin-left: auto; }
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 24px;
+  width: 90%;
+  max-width: 480px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* NOTIFICATION */
+.notif {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  z-index: 200;
+  transform: translateX(120%);
+  transition: transform 0.3s;
+  max-width: 280px;
+}
+
+.notif.show { transform: translateX(0); }
+.notif.success { border-color: rgba(62,207,142,0.4); }
+.notif.warning { border-color: rgba(245,197,66,0.4); }
+
+/* EXAM NEXT */
+.next-exam-card {
+  background: var(--bg2);
+  border: 1px solid rgba(255,79,106,0.25);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.next-exam-icon { font-size: 32px; }
+.next-exam-info { flex: 1; }
+.next-exam-label { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; }
+.next-exam-name { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin: 2px 0; }
+.next-exam-date { font-size: 12px; color: var(--text2); }
+.next-exam-days { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; color: var(--red); }
+.next-exam-days-label { font-size: 10px; color: var(--text3); font-family: 'DM Mono', monospace; text-align: center; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .sidebar { width: 60px; }
+  .nav-item span:not(.icon) { display: none; }
+  .logo-text { display: none; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .subjects-grid { grid-template-columns: 1fr; }
+  .fiches-layout, .notes-layout { grid-template-columns: 1fr; }
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: var(--text3);
+}
+
+.empty-state-icon { font-size: 40px; margin-bottom: 10px; }
+.empty-state-text { font-size: 14px; }
+
+/* CHART */
+.chart-wrap {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.chart-title { font-size: 12px; color: var(--text3); font-family: 'DM Mono', monospace; margin-bottom: 12px; }
+
+.bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 100px; }
+.bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; }
+.bar { width: 100%; border-radius: 4px 4px 0 0; transition: height 0.5s; min-height: 4px; }
+.bar-label { font-size: 9px; color: var(--text3); font-family: 'DM Mono', monospace; text-align: center; white-space: nowrap; }
+.bar-val { font-size: 10px; font-family: 'DM Mono', monospace; }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">INKATTOPREP</div>
+    <div class="logo-sub">2026 · S6 - GED</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Navigation</div>
+    <button class="nav-item active" onclick="showView('dashboard')" data-view="dashboard">
+      <span class="icon">⬡</span> <span>Dashboard</span>
+    </button>
+    <button class="nav-item" onclick="showView('planning')" data-view="planning">
+      <span class="icon">◫</span> <span>Planning</span>
+    </button>
+    <button class="nav-item" onclick="showView('matieres')" data-view="matieres">
+      <span class="icon">◈</span> <span>Matières</span>
+    </button>
+    <button class="nav-item" onclick="showView('timer')" data-view="timer">
+      <span class="icon">◷</span> <span>Pomodoro</span>
+    </button>
+    <button class="nav-item" onclick="showView('fiches')" data-view="fiches">
+      <span class="icon">◪</span> <span>Fiches Q&R</span>
+    </button>
+    <button class="nav-item" onclick="showView('notes')" data-view="notes">
+      <span class="icon">◲</span> <span>Notes</span>
+    </button>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="progress-overall">
+      <div class="prog-label">Progression globale</div>
+      <div class="prog-bar-wrap"><div class="prog-bar" id="sidebar-prog" style="width:0%"></div></div>
+      <div class="prog-pct" id="sidebar-pct">0%</div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title" id="topbar-title">Dashboard</div>
+    <div class="topbar-date" id="topbar-date"></div>
+    <button class="btn" onclick="resetAll()">↺ Reset</button>
+  </div>
+
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="view active" id="view-dashboard">
+
+      <div class="countdown-banner" id="countdown-banner">
+        <div class="countdown-item"><div class="countdown-val" id="cd-days">—</div><div class="countdown-label">JOURS</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item"><div class="countdown-val" id="cd-h">—</div><div class="countdown-label">HEURES</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item"><div class="countdown-val" id="cd-m">—</div><div class="countdown-label">MIN</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item"><div class="countdown-val" id="cd-s">—</div><div class="countdown-label">SEC</div></div>
+        <div class="countdown-text" id="cd-text">— avant le 1er examen</div>
+      </div>
+
+      <div class="next-exam-card">
+        <div class="next-exam-icon">📋</div>
+        <div class="next-exam-info">
+          <div class="next-exam-label">PROCHAIN EXAMEN</div>
+          <div class="next-exam-name" id="next-exam-name">—</div>
+          <div class="next-exam-date" id="next-exam-date">—</div>
+        </div>
+        <div>
+          <div class="next-exam-days" id="next-exam-days">—</div>
+          <div class="next-exam-days-label">JOURS</div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card" style="--accent-color: var(--green)">
+          <div class="stat-label">CRÉNEAUX FAITS</div>
+          <div class="stat-value" id="stat-done">0</div>
+          <div class="stat-sub" id="stat-done-sub">sur 0 total</div>
+        </div>
+        <div class="stat-card" style="--accent-color: var(--blue)">
+          <div class="stat-label">TEMPS ÉTUDE</div>
+          <div class="stat-value" id="stat-time">0h</div>
+          <div class="stat-sub">accumulées</div>
+        </div>
+        <div class="stat-card" style="--accent-color: var(--gold)">
+          <div class="stat-label">FICHES MAÎTRISÉES</div>
+          <div class="stat-value" id="stat-fiches">0</div>
+          <div class="stat-sub" id="stat-fiches-sub">sur 0 fiches</div>
+        </div>
+        <div class="stat-card" style="--accent-color: var(--orange)">
+          <div class="stat-label">SESSIONS POMO</div>
+          <div class="stat-value" id="stat-pomo">0</div>
+          <div class="stat-sub">complétées</div>
+        </div>
+      </div>
+
+      <div class="chart-wrap">
+        <div class="chart-title">PROGRESSION PAR MATIÈRE</div>
+        <div class="bar-chart" id="dashboard-chart"></div>
+      </div>
+
+      <div class="planning-section">
+        <div class="section-head">
+          <div class="section-badge badge-prep">Aujourd'hui</div>
+          <div class="section-title" id="today-title">Aucune session prévue</div>
+        </div>
+        <div id="today-slots"></div>
+      </div>
+
+    </div>
+
+    <!-- PLANNING -->
+    <div class="view" id="view-planning">
+
+      <div class="planning-section">
+        <div class="section-head">
+          <div class="section-badge badge-prep">Phase 1</div>
+          <div class="section-title">Préparation — 28 Nov → 4 Déc</div>
+        </div>
+        <div id="prep-days"></div>
+      </div>
+
+      <div class="planning-section">
+        <div class="section-head">
+          <div class="section-badge badge-exam">Phase 2</div>
+          <div class="section-title">Examens — 5 Déc → 11 Déc</div>
+        </div>
+        <div id="exam-days"></div>
+      </div>
+
+    </div>
+
+    <!-- MATIÈRES -->
+    <div class="view" id="view-matieres">
+      <div class="subjects-grid" id="subjects-grid"></div>
+    </div>
+
+    <!-- TIMER -->
+    <div class="view" id="view-timer">
+      <div class="timer-container">
+        <div class="timer-subject-select" id="timer-subj-select"></div>
+
+        <div style="margin-bottom:12px; display:flex; gap:8px; align-items:center">
+          <div class="timer-presets">
+            <button class="timer-preset active" onclick="setPreset(25,this)">25 min</button>
+            <button class="timer-preset" onclick="setPreset(45,this)">45 min</button>
+            <button class="timer-preset" onclick="setPreset(90,this)">90 min</button>
+          </div>
+        </div>
+
+        <div class="timer-display">
+          <svg class="timer-svg" width="260" height="260" viewBox="0 0 260 260">
+            <circle class="timer-ring-bg" cx="130" cy="130" r="115"/>
+            <circle class="timer-ring" id="timer-ring" cx="130" cy="130" r="115"
+              stroke-dasharray="722.57"
+              stroke-dashoffset="0"
+              stroke="url(#timerGrad)"/>
+            <defs>
+              <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#6c63ff"/>
+                <stop offset="100%" style="stop-color:#a594ff"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="timer-text-wrap">
+            <div class="timer-time" id="timer-display">25:00</div>
+            <div class="timer-mode" id="timer-mode-label">TRAVAIL</div>
+            <div style="font-size:11px; color:var(--text3); margin-top:4px" id="timer-subj-label">—</div>
+          </div>
+        </div>
+
+        <div class="timer-controls">
+          <button class="timer-btn" onclick="resetTimer()" title="Reset">↺</button>
+          <button class="timer-btn main-btn" id="timer-play-btn" onclick="toggleTimer()">▶</button>
+          <button class="timer-btn" onclick="skipPhase()" title="Skip">⏭</button>
+        </div>
+
+        <div class="timer-sessions" id="timer-sessions">
+          <div style="font-size:12px; color:var(--text3); font-family:'DM Mono',monospace; margin-bottom:10px">SESSIONS AUJOURD'HUI</div>
+          <div id="sessions-list"><div class="empty-state" style="padding:16px 0; font-size:12px">Aucune session. Lance le timer !</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FICHES -->
+    <div class="view" id="view-fiches">
+      <div class="fiches-layout">
+        <div class="fiches-sidebar">
+          <div style="padding:10px 14px; font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; border-bottom:1px solid var(--border)">MATIÈRES</div>
+          <div id="fiches-subj-list"></div>
+        </div>
+        <div class="fiches-main" id="fiches-main">
+          <div class="add-fiche-form">
+            <div style="font-size:12px; font-weight:500; margin-bottom:12px">+ Ajouter une fiche</div>
+            <div class="form-row">
+              <div class="form-label">MATIÈRE</div>
+              <select class="form-input" id="fiche-subj-select">
+                <option value="elec">Électronique</option>
+                <option value="fluides">Mécanique de fluides</option>
+                <option value="bureau">Bureau</option>
+                <option value="stats">Mod. Statistiques</option>
+                <option value="metal">Matériaux Métalliques</option>
+                <option value="java">Java</option>
+                <option value="ro">RO</option>
+                <option value="compo">Matériaux Composites</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-label">QUESTION</div>
+              <textarea class="form-input" id="fiche-question" placeholder="Ex: Qu'est-ce que la loi de Bernoulli ?"></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-label">RÉPONSE / FORMULE</div>
+              <textarea class="form-input" id="fiche-answer" placeholder="Ex: P + ½ρv² + ρgh = constante..."></textarea>
+            </div>
+            <button class="btn primary" onclick="addFiche()">Ajouter la fiche</button>
+          </div>
+          <div id="fiches-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="view" id="view-notes">
+      <div class="notes-layout">
+        <div class="notes-list">
+          <div class="notes-list-header">
+            <span>Notes</span>
+            <button class="btn" onclick="addNote()" style="padding:3px 10px; font-size:11px">+ New</button>
+          </div>
+          <div id="notes-list-items"></div>
+        </div>
+        <div class="note-editor">
+          <div class="note-editor-header">
+            <input class="note-title-input" id="note-title" placeholder="Titre de la note..." oninput="saveCurrentNote()">
+            <select class="form-input" id="note-subj" onchange="saveCurrentNote()" style="width:auto; padding:4px 8px; font-size:11px">
+              <option value="">— Matière —</option>
+              <option value="elec">Électronique</option>
+              <option value="fluides">Mécanique fluides</option>
+              <option value="bureau">Bureau</option>
+              <option value="stats">Mod. Statistiques</option>
+              <option value="metal">Mat. Métalliques</option>
+              <option value="java">Java</option>
+              <option value="ro">RO</option>
+              <option value="compo">Mat. Composites</option>
+            </select>
+            <button class="btn" onclick="deleteCurrentNote()" style="color:var(--red); border-color:rgba(255,79,106,0.3)">Supprimer</button>
+          </div>
+          <textarea class="note-body-input" id="note-body" placeholder="Écris tes notes ici... (Markdown supporté)" oninput="saveCurrentNote()"></textarea>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- NOTIFICATION -->
+<div class="notif" id="notif"></div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+const SUBJECTS = {
+  elec:    { name: 'Électronique',         color: '#4db8ff', priority: 1, type: 'Cours + TD + Exams',         examDay: '2025-12-10', examLabel: 'Mer 10 Déc' },
+  fluides: { name: 'Mécanique de fluides', color: '#3ecf8e', priority: 2, type: 'Résumé cours + TD + Exams',  examDay: '2025-12-08', examLabel: 'Lun 8 Déc' },
+  bureau:  { name: 'Bureau',               color: '#a594ff', priority: 3, type: 'TD + Exams',                 examDay: '2025-12-09', examLabel: 'Mar 9 Déc' },
+  stats:   { name: 'Mod. Statistiques',    color: '#f5c542', priority: 4, type: 'Résumé cours + TD + Exams',  examDay: '2025-12-05', examLabel: 'Ven 5 Déc' },
+  metal:   { name: 'Mat. Métalliques',     color: '#ff8c42', priority: 5, type: 'TD + Exams',                 examDay: '2025-12-11', examLabel: 'Jeu 11 Déc' },
+  java:    { name: 'Java',                 color: '#50fa7b', priority: 6, type: 'TD + Exams',                 examDay: '2025-12-10', examLabel: 'Mer 10 Déc' },
+  ro:      { name: 'RO',                   color: '#ffb347', priority: 7, type: 'TD + Exams',                 examDay: '2025-12-06', examLabel: 'Sam 6 Déc' },
+  compo:   { name: 'Mat. Composites',      color: '#ff6b9d', priority: 8, type: 'TD + Exams',                 examDay: '2025-12-11', examLabel: 'Jeu 11 Déc' },
+};
+
+const PLANNING = [
+  // --- PHASE PRÉPA ---
+  { id: 'd28', date: '2025-11-28', num: '28', day: 'Jeudi', phase: 'prep', slots: [
+    { id: 's28_1', time: '7h00–8h00',   subj: 'break',   task: 'Petit déjeuner + organisation', detail: 'Prépare fiches, planning imprimé' },
+    { id: 's28_2', time: '8h30–10h30',  subj: 'elec',    task: 'Électronique — Cours complet', detail: 'Lecture + résumé chapitre par chapitre' },
+    { id: 's28_3', time: '10h30–12h30', subj: 'elec',    task: 'Électronique — Suite cours', detail: 'Formules clés → fiche mémo' },
+    { id: 's28_4', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause active', detail: 'Relire fiches en marchant' },
+    { id: 's28_5', time: '14h30–16h30', subj: 'elec',    task: 'Électronique — TD', detail: 'Exercices types, corriger erreurs' },
+    { id: 's28_6', time: '16h30–18h30', subj: 'fluides', task: 'Mécanique fluides — Cours', detail: 'Résumé cours, loi de Bernoulli' },
+    { id: 's28_7', time: '19h00–19h30', subj: 'break',   task: 'Goûter', detail: '' },
+    { id: 's28_8', time: '19h30–21h00', subj: 'fluides', task: 'Mécanique fluides — TD', detail: 'Exercices résolus' },
+    { id: 's28_9', time: '22h30–23h30', subj: 'break',   task: 'Dîner + relecture légère', detail: 'Fiches mémo uniquement' },
+  ]},
+  { id: 'd29', date: '2025-11-29', num: '29', day: 'Vendredi', phase: 'prep', slots: [
+    { id: 's31_1', time: '8h30–10h30',  subj: 'bureau',  task: 'Bureau — TD', detail: 'Études de marché, bilans' },
+    { id: 's31_2', time: '10h30–12h30', subj: 'bureau',  task: 'Bureau — TD', detail: 'Gestion de projet, exercices' },
+    { id: 's31_3', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause', detail: '' },
+    { id: 's31_4', time: '14h30–16h30', subj: 'bureau',  task: 'Bureau — Révision globale', detail: 'Fiche synthèse finale' },
+    { id: 's31_5', time: '16h30–18h30', subj: 'bureau',  task: 'Bureau — Points faibles', detail: 'Refais les exercices ratés' },
+    { id: 's31_6', time: '19h00–19h30', subj: 'break',   task: 'Goûter', detail: '' },
+    { id: 's31_7', time: '19h30–21h00', subj: 'ro',  task: 'RO — Revision', detail: 'Mémorise formules essentielles' },
+    { id: 's31_8', time: '21h00–23h00', subj: 'java',  task: 'JAVA — Revision', detail: 'Relis fiches, visualise l\'examen' },
+  ]},
+  { id: 'd30', date: '2025-11-30', num: '30', day: 'Samedi', phase: 'prep', slots: [
+    { id: 's30_1', time: '8h30–10h30',  subj: 'metal',   task: 'Mat. Métalliques — TD', detail: 'Propriétés mécaniques' },
+    { id: 's30_2', time: '10h30–12h30', subj: 'metal',   task: 'Mat. Métalliques — TD', detail: 'Diagrammes fer-carbone' },
+    { id: 's30_3', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause', detail: '' },
+    { id: 's30_4', time: '14h30–16h30', subj: 'elec',    task: 'Électronique — Révision globale', detail: 'Relis toutes tes fiches + exercices ratés' },
+    { id: 's30_5', time: '16h30–18h30', subj: 'elec',    task: 'Électronique — Simulation examen', detail: 'Sujet complet en conditions réelles' },
+    { id: 's30_6', time: '19h00–19h30', subj: 'break',   task: 'Goûter', detail: '' },
+    { id: 's30_7', time: '19h30–21h00', subj: 'compo',   task: 'Mat. Composites — TD', detail: 'Exercices de base' },
+    { id: 's30_8', time: '21h00–23h00', subj: 'compo',   task: 'Mat. Composites — TD', detail: 'Loi des mélanges' },
+  ]},
+  { id: 'd31', date: '2025-11-31', num: '31', day: 'Dimanche', phase: 'prep', slots: [
+    { id: 's29_1', time: '8h30–10h30',  subj: 'elec',    task: 'Électronique — TD avancés', detail: 'Exercices examen années précédentes' },
+    { id: 's29_2', time: '10h30–12h30', subj: 'elec',    task: 'Électronique — Correction', detail: 'Identifie tes points faibles' },
+    { id: 's29_3', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause', detail: '' },
+    { id: 's29_4', time: '14h30–16h30', subj: 'fluides', task: 'Mécanique fluides — Résumé', detail: 'Fiche synthèse 1 page' },
+    { id: 's29_5', time: '16h30–18h30', subj: 'stats',   task: 'Mod. Statistiques — Cours', detail: 'Probabilités, distributions clés' },
+    { id: 's29_6', time: '19h00–19h30', subj: 'break',   task: 'Goûter', detail: '' },
+    { id: 's29_7', time: '19h30–21h00', subj: 'stats',   task: 'Mod. Statistiques — TD', detail: 'Exercices types' },
+    { id: 's29_8', time: '21h00–23h00', subj: 'stats',   task: 'Mod. Statistiques — Annales', detail: 'Annales si disponibles' },
+  ]},
+  { id: 'd1', date: '2025-12-01', num: '1', day: 'Lundi', phase: 'prep', slots: [
+    { id: 's1_1', time: '8h30–10h30',  subj: 'stats',    task: 'Mod. Statistiques — Cours', detail: 'Creer fiche de synthese' },
+    { id: 's1_2', time: '10h30–12h30', subj: 'stats',    task: 'Mod. Statistiques — TD', detail: 'Exercices types' },
+    { id: 's1_3', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + repos mental', detail: 'Pas de révision pendant le repas' },
+    { id: 's1_4', time: '14h30–16h30', subj: 'fluides', task: 'Mécanique fluides — TD avancés', detail: 'Exercices complexes, annales' },
+    { id: 's1_5', time: '16h30–18h30', subj: 'fluides', task: 'Mécanique fluides — Révision', detail: 'Fiches + points faibles' },
+    { id: 's1_6', time: '19h00–19h30', subj: 'break',   task: 'Goûter', detail: '' },
+    { id: 's1_7', time: '19h30–21h00', subj: 'fluides', task: 'Mécanique fluides — Finalisation', detail: 'Mémorise toutes les formules' },
+    { id: 's1_8', time: '21h00–22h30', subj: 'elec',    task: 'Électronique — Dernière lecture', detail: 'Relis fiches uniquement, relaxe-toi' },
+  ]},
+  { id: 'd2', date: '2025-12-02', num: '2', day: 'Mardi', phase: 'prep', slots: [
+    { id: 's2_1', time: '8h30–10h30',  subj: 'fluides', task: 'Mécanique fluides — Simulation', detail: 'Sujet complet en conditions réelles' },
+    { id: 's2_2', time: '10h30–12h30', subj: 'fluides', task: 'Mécanique fluides — Correction', detail: 'Analyse tes erreurs' },
+    { id: 's2_3', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause', detail: '' },
+    { id: 's2_4', time: '14h30–16h30', subj: 'metal',   task: 'Mat. Métalliques — Révision', detail: 'Fiche synthèse + points faibles' },
+    { id: 's2_5', time: '16h30–18h30', subj: 'ro',      task: 'RO — TD', detail: 'Programmation linéaire, simplexe' },
+    { id: 's2_6', time: '19h00–19h30', subj: 'break',   task: 'Goûter', detail: '' },
+    { id: 's2_7', time: '19h30–21h00', subj: 'ro',      task: 'RO — TD', detail: 'Méthodes graphiques' },
+    { id: 's2_8', time: '21h00–23h00', subj: 'ro',      task: 'RO — Révision', detail: 'Fiches + formules' },
+  ]},
+  { id: 'd3', date: '2025-12-03', num: '3', day: 'Mercredi', phase: 'prep', slots: [
+    { id: 's3_1', time: '8h30–10h30',  subj: 'stats',   task: 'Mod. Statistiques — Résumé cours', detail: 'Fiche synthèse toutes les lois' },
+    { id: 's3_2', time: '10h30–12h30', subj: 'stats',   task: 'Mod. Statistiques — TD avancés', detail: 'Tests d\'hypothèses' },
+    { id: 's3_3', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause', detail: '' },
+    { id: 's3_4', time: '14h30–16h30', subj: 'stats',   task: 'Mod. Statistiques — TD', detail: 'Régression, intervalles de confiance' },
+    { id: 's3_5', time: '16h30–18h30', subj: 'stats',   task: 'Mod. Statistiques — Simulation', detail: 'Sujet complet chrono' },
+    { id: 's3_6', time: '19h00–19h30', subj: 'break',   task: 'Goûter', detail: '' },
+    { id: 's3_7', time: '19h30–21h00', subj: 'elec',    task: 'Électronique — Sujet', detail: 'Simulation d\'un problème complet.' },
+    { id: 's3_8', time: '21h00–23h00', subj: 'elec',   task: 'Électronique — ChronoSujet', detail: 'Sujet chrono avec contraintes' },
+  ]},
+  { id: 'd4', date: '2025-12-04', num: '4', day: 'Jeudi', phase: 'prep', slots: [
+    { id: 's4_1', time: '8h30–12h30',  subj: 'break',   task: 'TRIP (cours imposé)', detail: 'Sois présent et attentif' },
+    { id: 's4_2', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause', detail: '' },
+    { id: 's4_6', time: '14h30–16h30', subj: 'java',    task: 'Java — TD + révision', detail: 'POO, exercices pratiques' },
+    { id: 's4_7', time: '16h30–18h30', subj: 'stats',   task: 'Mod. Statistiques — Révision', detail: 'Fiches de synthèse' },
+    { id: 's4_5', time: '19h00–19h30', subj: 'break',   task: 'Goûter', detail: '' },
+    { id: 's4_3', time: '19h30–21h30', subj: 'stats',   task: 'Mod. Statistiques — Révision finale', detail: 'Uniquement fiches' },
+    { id: 's4_4', time: '21h30–22h30', subj: 'stats',   task: 'Mod. Statistiques — Formules clés', detail: 'Visualise l\'examen' },
+  ]},
+  // --- PHASE EXAMEN ---
+  { id: 'd5', date: '2025-12-05', num: '5', day: 'Vendredi', phase: 'exam', isExam: true, examLabel: '⚡ Examen : Mod. Statistiques', slots: [
+    { id: 's5_1', time: '8h30–10h30',  subj: 'exam',    task: '📋 EXAMEN — Mod. Statistiques', detail: 'Relis fiches 30 min avant, reste calme' },
+    { id: 's5_2', time: '10h30–13h00', subj: 'break',   task: 'Décompresse + déjeuner', detail: 'C\'est terminé, tourne la page' },
+    { id: 's5_3', time: '13h00–16h30', subj: 'fluides', task: 'Mécanique fluides — Révision', detail: 'Fiches + 1 sujet chrono' },
+    { id: 's5_4', time: '16h30–17h00', subj: 'break',   task: 'Pause + goûter', detail: 'Repos mérité' },
+    { id: 's5_5', time: '19h30–23h00', subj: 'ro',   task: 'RO — Révision finale', detail: 'Fiches + exercices clés' },
+  ]},
+  { id: 'd6', date: '2025-12-06', num: '6', day: 'Samedi', phase: 'exam', isExam: true, examLabel: '⚡ Examen : RO', slots: [
+    { id: 's6_1', time: '8h30–10h30',  subj: 'exam',    task: '📋 EXAMEN — RO', detail: 'Fiches uniquement ce matin' },
+    { id: 's6_2', time: '10h30–13h00', subj: 'break',   task: 'Pause + déjeuner', detail: '' },
+    { id: 's6_3', time: '13h00–16h30', subj: 'elec',    task: 'Électronique — Révision flash', detail: 'Fiches + formules essentielles' },
+    { id: 's6_4', time: '16h30–19h30', subj: 'break',   task: 'Goûter + pause totale', detail: 'Dors si possible' },
+    { id: 's6_5', time: '19h30–23h00', subj: 'fluides', task: 'Mécanique fluides — Dernier tour', detail: 'Fiches, formules, visualisation' },
+  ]},
+  { id: 'd7', date: '2025-12-07', num: '7', day: 'Dimanche', phase: 'exam', isFree: true, slots: [
+    { id: 's7_1', time: '9h00–12h00', subj: 'elec',    task: 'Révision Électronique', detail: 'Fiches, reviser les exercices faits' },
+    { id: 's7_2', time: '12h00–14h00', subj: 'break',   task: 'Déjeuner + repos total', detail: 'Détends-toi, c\'est la veille de l\'examen' },
+    { id: 's7_3', time: '14h00–17h30', subj: 'fluides', task: 'Relecture Mécanique fluides', detail: '15 min par grand thème max cours, puis revision des cas faits.' },
+  ]},
+  { id: 'd8', date: '2025-12-08', num: '8', day: 'Lundi', phase: 'exam', isExam: true, examLabel: '⚡ Examen : Mécanique de fluides', slots: [
+    { id: 's8_1', time: '8h30–10h30',  subj: 'exam',    task: '📋 EXAMEN — Mécanique de fluides', detail: 'Fiches 30 min avant, sois calme' },
+    { id: 's8_2', time: '10h30–13h00', subj: 'break',   task: 'Pause + déjeuner', detail: 'Ne ressasse pas, tourne la page' },
+    { id: 's8_3', time: '13h00–16h30', subj: 'metal',  task: 'Mat. Métalliques — Dernière révision', detail: 'Revision des cas de calculs.' },
+    { id: 's8_4', time: '16h30–18h30', subj: 'break',   task: 'Pause + goûter', detail: '' },
+    { id: 's8_5', time: '18h30–21h00', subj: 'bureau',   task: 'Bureau - Revision Finale', detail: 'Fiches + simulation rapide' },
+  ]},
+  { id: 'd9', date: '2025-12-09', num: '9', day: 'Mardi', phase: 'exam', isExam: true, examLabel: '⚡ Examen : Bureau', slots: [
+    { id: 's9_1', time: '8h30–14h30',  subj: 'break',    task: 'Pause déjeuner, lisez les fiches', detail: '' },
+    { id: 's9_2', time: '14h30–15h30', subj: 'exam',   task: '📋 EXAMEN — Bureau', detail: 'Relis fiches avant l\'examen, reste concentré' },
+    { id: 's9_3', time: '15h30–18h30', subj: 'elec',    task: 'Électronique — Révision finale', detail: 'Fiches, points faibles, formules' },
+    { id: 's9_4', time: '19h00–19h30', subj: 'break',   task: 'Goûter', detail: '' },
+    { id: 's9_5', time: '19h30–23h00', subj: 'java',    task: 'Java — Révision finale', detail: 'Programmes types, algorithmes clés' },
+  ]},
+  { id: 'd10', date: '2025-12-10', num: '10', day: 'Mercredi', phase: 'exam', isExam: true, examLabel: '⚡ Examens : Java + Électronique', slots: [
+    { id: 's10_1', time: '8h30–10h30',  subj: 'exam',   task: '📋 EXAMEN — Java', detail: 'Fiches 20 min avant' },
+    { id: 's10_2', time: '10h30–14h30', subj: 'break',  task: 'Pause déjeuner, relis les fiches', detail: '' },
+    { id: 's10_3', time: '14h30–16h00', subj: 'exam',   task: '📋 EXAMEN — Électronique', detail: 'Ta priorité n°1 — donne tout !' },
+    { id: 's10_4', time: '16h00–19h00', subj: 'compo',  task: 'Mat. Composites — Révision finale', detail: 'Fiches + exercices clés' },
+    { id: 's10_5', time: '19h00–19h30', subj: 'break',  task: 'Goûter', detail: '' },
+    { id: 's10_6', time: '19h30–23h00', subj: 'metal',  task: 'Mat. Métalliques — Dernière lecture', detail: 'Fiches seulement' },
+  ]},
+  { id: 'd11', date: '2025-12-11', num: '11', day: 'Jeudi', phase: 'exam', isExam: true, examLabel: '⚡ Examens finaux : Mat. Métalliques + Mat. Composites', slots: [
+    { id: 's11_1', time: '8h30–10h30',  subj: 'exam',   task: '📋 EXAMEN — Mat. Métalliques', detail: 'Fiches 20 min avant' },
+    { id: 's11_2', time: '10h30–14h30', subj: 'break',  task: 'Pause déjeuner, lisez les fiches', detail: '' },
+    { id: 's11_3', time: '14h30–16h30', subj: 'exam',   task: '📋 EXAMEN — Mat. Composites', detail: 'Derniers examens' },
+    { id: 's11_4', time: '16h30–19h00', subj: 'break',  task: 'Pause après l\'examen', detail: 'Repose-toi' },
+  ]},
+];
+
+// ============================================================
+// STATE
+// ============================================================
+
+let state = {
+  done: {},       // slotId -> bool
+  fiches: [],     // { id, subj, question, answer, mastered }
+  notes: [],      // { id, title, body, subj, date }
+  pomSessions: [],// { subj, duration, date }
+  currentNoteId: null,
+  currentFicheSubj: 'all',
+  studyMinutes: 0,
+};
+
+function load() {
+  try {
+    const s = localStorage.getItem('examprep_state');
+    if (s) Object.assign(state, JSON.parse(s));
+  } catch(e) {}
+}
+
+function save() {
+  try { localStorage.setItem('examprep_state', JSON.stringify(state)); } catch(e) {}
+}
+
+function resetAll() {
+  if (!confirm('Réinitialiser toute la progression ? (fiches et notes conservées)')) return;
+  state.done = {};
+  state.pomSessions = [];
+  state.studyMinutes = 0;
+  save();
+  renderAll();
+  notify('Progression réinitialisée', 'warning');
+}
+
+// ============================================================
+// VIEWS
+// ============================================================
+
+const TITLES = { dashboard: 'Dashboard', planning: 'Planning', matieres: 'Matières', timer: 'Pomodoro', fiches: 'Fiches Q&R', notes: 'Notes' };
+
+function showView(v) {
+  document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('view-' + v).classList.add('active');
+  document.querySelector(`[data-view="${v}"]`).classList.add('active');
+  document.getElementById('topbar-title').textContent = TITLES[v];
+  if (v === 'dashboard') renderDashboard();
+  if (v === 'planning') renderPlanning();
+  if (v === 'matieres') renderMatieres();
+  if (v === 'timer') renderTimerSubjects();
+  if (v === 'fiches') renderFiches();
+  if (v === 'notes') renderNotes();
+}
+
+// ============================================================
+// DATE & COUNTDOWN
+// ============================================================
+
+function updateDate() {
+  const now = new Date();
+  const opts = { weekday: 'long', day: 'numeric', month: 'long' };
+  document.getElementById('topbar-date').textContent = now.toLocaleDateString('fr-FR', opts);
+}
+
+function updateCountdown() {
+  const firstExam = new Date('2025-12-05T08:30:00');
+  const now = new Date();
+  const diff = firstExam - now;
+
+  if (diff <= 0) {
+    document.getElementById('countdown-banner').style.display = 'none';
+    return;
+  }
+
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+
+  document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  document.getElementById('cd-text').textContent = `avant le 1er examen (Mod. Statistiques)`;
+}
+
+function updateNextExam() {
+  const now = new Date();
+  const exams = [
+    { name: 'Mod. Statistiques', date: new Date('2025-12-05'), label: 'Vendredi 5 Décembre' },
+    { name: 'RO', date: new Date('2025-12-06'), label: 'Samedi 6 Décembre' },
+    { name: 'Mécanique de fluides', date: new Date('2025-12-08'), label: 'Lundi 8 Décembre' },
+    { name: 'Bureau', date: new Date('2025-12-09'), label: 'Mardi 9 Décembre' },
+    { name: 'Java + Électronique', date: new Date('2025-12-10'), label: 'Mercredi 10 Décembre' },
+    { name: 'Mat. Métalliques + Composites', date: new Date('2025-12-11'), label: 'Jeudi 11 Décembre' },
+  ];
+
+  const next = exams.find(e => e.date >= now);
+  if (!next) return;
+
+  document.getElementById('next-exam-name').textContent = next.name;
+  document.getElementById('next-exam-date').textContent = next.label;
+  const days = Math.ceil((next.date - now) / 86400000);
+  document.getElementById('next-exam-days').textContent = days;
+}
+
+// ============================================================
+// PLANNING RENDER
+// ============================================================
+
+function subjClass(subj) {
+  const map = { elec:'c-elec', fluides:'c-fluides', bureau:'c-bureau', stats:'c-stats', metal:'c-metal', java:'c-java', ro:'c-ro', compo:'c-compo', break:'c-break', exam:'c-exam' };
+  return map[subj] || 'c-break';
+}
+
+function subjLabel(subj) {
+  if (subj === 'break') return '';
+  if (subj === 'exam') return 'EXAMEN';
+  return SUBJECTS[subj] ? SUBJECTS[subj].name.split(' ')[0] : subj;
+}
+
+function buildDayCard(d, open = false) {
+  const div = document.createElement('div');
+  const doneCount = d.slots.filter(s => s.subj !== 'break' && state.done[s.id]).length;
+  const totalWork = d.slots.filter(s => s.subj !== 'break').length;
+  const cls = d.isExam ? 'exam-day' : d.isFree ? 'free-day' : '';
+
+  const subjBadges = [...new Set(d.slots.filter(s => s.subj !== 'break' && s.subj !== 'exam').map(s => s.subj))]
+    .map(s => `<span class="subj-badge ${subjClass(s)}">${SUBJECTS[s]?.name || s}</span>`).join('');
+
+  div.className = `day-card ${cls} ${open ? 'open' : ''}`;
+  div.id = 'day-' + d.id;
+  div.innerHTML = `
+    <div class="day-header" onclick="toggleDay('${d.id}')">
+      <div class="day-num">${d.num}</div>
+      <div class="day-meta">
+        <div class="day-name">${d.day}${d.isExam ? ' <span style="color:var(--red);font-size:11px">' + d.examLabel + '</span>' : ''}${d.isFree ? ' <span style="color:var(--green);font-size:11px">— Jour libre</span>' : ''}</div>
+        <div class="day-subjects" style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap">${subjBadges}</div>
+      </div>
+      <div class="day-progress">
+        <span class="day-done-count">${doneCount}/${totalWork}</span>
+      </div>
+      <div class="day-toggle">▼</div>
+    </div>
+    <div class="day-slots">
+      ${d.slots.map(sl => buildSlotRow(sl)).join('')}
+    </div>
+  `;
+  return div;
+}
+
+function buildSlotRow(sl) {
+  const isDone = state.done[sl.id];
+  const isBreak = sl.subj === 'break';
+  const cls = `slot-row ${isDone ? 'done' : ''} ${isBreak ? 'break-row' : ''}`;
+  const onclick = isBreak ? '' : `onclick="toggleSlot('${sl.id}')"`;
+  return `
+    <div class="${cls}" id="slot-${sl.id}" ${onclick}>
+      ${!isBreak ? `<div class="slot-check">${isDone ? '✓' : ''}</div>` : '<div style="width:18px"></div>'}
+      <div class="slot-time">${sl.time}</div>
+      <div class="slot-info">
+        <div class="slot-task">${sl.task}</div>
+        ${sl.detail ? `<div class="slot-detail">${sl.detail}</div>` : ''}
+      </div>
+      ${sl.subj !== 'break' ? `<div class="slot-tag ${subjClass(sl.subj)}">${subjLabel(sl.subj)}</div>` : ''}
+    </div>
+  `;
+}
+
+function toggleDay(id) {
+  document.getElementById('day-' + id).classList.toggle('open');
+}
+
+function toggleSlot(id) {
+  state.done[id] = !state.done[id];
+  save();
+  // update slot row
+  const sl = findSlot(id);
+  if (sl) {
+    const el = document.getElementById('slot-' + id);
+    if (el) {
+      const isDone = state.done[id];
+      el.className = `slot-row ${isDone ? 'done' : ''}`;
+      const chk = el.querySelector('.slot-check');
+      if (chk) chk.textContent = isDone ? '✓' : '';
+    }
+  }
+  updateProgressUI();
+  if (state.done[id]) notify('Créneau complété ✓', 'success');
+}
+
+function findSlot(id) {
+  for (const d of PLANNING) for (const s of d.slots) if (s.id === id) return s;
+  return null;
+}
+
+function renderPlanning() {
+  const prep = document.getElementById('prep-days');
+  const exam = document.getElementById('exam-days');
+  prep.innerHTML = '';
+  exam.innerHTML = '';
+
+  const today = new Date().toISOString().slice(0, 10);
+
+  for (const d of PLANNING) {
+    const card = buildDayCard(d, d.date === today);
+    if (d.phase === 'prep') prep.appendChild(card);
+    else exam.appendChild(card);
+  }
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+
+function renderDashboard() {
+  updateNextExam();
+  updateProgressUI();
+  renderTodaySlots();
+  renderDashboardChart();
+}
+
+function renderTodaySlots() {
+  const today = new Date().toISOString().slice(0, 10);
+  const todayPlan = PLANNING.find(d => d.date === today);
+  const container = document.getElementById('today-slots');
+  const title = document.getElementById('today-title');
+
+  if (!todayPlan) {
+    title.textContent = 'Aucune session planifiée aujourd\'hui';
+    container.innerHTML = '';
+    return;
+  }
+
+  title.textContent = todayPlan.day + ' ' + todayPlan.num + ' — Programme du jour';
+  container.innerHTML = '';
+  const card = buildDayCard(todayPlan, true);
+  container.appendChild(card);
+}
+
+function renderDashboardChart() {
+  const container = document.getElementById('dashboard-chart');
+  container.innerHTML = '';
+
+  const subjKeys = Object.keys(SUBJECTS);
+  const totals = {};
+  const dones = {};
+
+  for (const key of subjKeys) { totals[key] = 0; dones[key] = 0; }
+
+  for (const d of PLANNING) {
+    for (const sl of d.slots) {
+      if (sl.subj !== 'break' && sl.subj !== 'exam' && SUBJECTS[sl.subj]) {
+        totals[sl.subj]++;
+        if (state.done[sl.id]) dones[sl.subj]++;
+      }
+    }
+  }
+
+  const maxTotal = Math.max(...Object.values(totals), 1);
+
+  for (const key of subjKeys) {
+    const pct = totals[key] > 0 ? dones[key] / totals[key] : 0;
+    const heightPct = (totals[key] / maxTotal) * 100;
+    const fillPct = pct * heightPct;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'bar-wrap';
+    wrap.innerHTML = `
+      <div class="bar-val" style="color:${SUBJECTS[key].color};font-size:9px">${Math.round(pct*100)}%</div>
+      <div style="flex:1;width:100%;display:flex;align-items:flex-end;border-radius:4px;background:var(--bg4);overflow:hidden;position:relative">
+        <div class="bar" style="position:absolute;bottom:0;left:0;right:0;height:${Math.round(fillPct)}%;background:${SUBJECTS[key].color};opacity:0.8"></div>
+      </div>
+      <div class="bar-label" style="color:${SUBJECTS[key].color}">${SUBJECTS[key].name.split(' ')[0]}</div>
+    `;
+    container.appendChild(wrap);
+  }
+}
+
+function updateProgressUI() {
+  let total = 0, done = 0;
+  for (const d of PLANNING) {
+    for (const sl of d.slots) {
+      if (sl.subj !== 'break') {
+        total++;
+        if (state.done[sl.id]) done++;
+      }
+    }
+  }
+
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+  document.getElementById('sidebar-prog').style.width = pct + '%';
+  document.getElementById('sidebar-pct').textContent = pct + '%';
+  document.getElementById('stat-done').textContent = done;
+  document.getElementById('stat-done-sub').textContent = `sur ${total} créneaux`;
+
+  const mins = (state.pomSessions || []).reduce((a, s) => a + (s.duration || 0), 0);
+  document.getElementById('stat-time').textContent = Math.round(mins / 60) + 'h';
+
+  const fichesMastered = (state.fiches || []).filter(f => f.mastered).length;
+  document.getElementById('stat-fiches').textContent = fichesMastered;
+  document.getElementById('stat-fiches-sub').textContent = `sur ${(state.fiches || []).length} fiches`;
+
+  document.getElementById('stat-pomo').textContent = (state.pomSessions || []).length;
+}
+
+// ============================================================
+// MATIÈRES
+// ============================================================
+
+function renderMatieres() {
+  const grid = document.getElementById('subjects-grid');
+  grid.innerHTML = '';
+
+  const totals = {};
+  const dones = {};
+  for (const key of Object.keys(SUBJECTS)) { totals[key] = 0; dones[key] = 0; }
+
+  for (const d of PLANNING) {
+    for (const sl of d.slots) {
+      if (SUBJECTS[sl.subj]) {
+        totals[sl.subj]++;
+        if (state.done[sl.id]) dones[sl.subj]++;
+      }
+    }
+  }
+
+  for (const [key, s] of Object.entries(SUBJECTS)) {
+    const pct = totals[key] > 0 ? Math.round(dones[key] / totals[key] * 100) : 0;
+    const fichesMat = (state.fiches || []).filter(f => f.subj === key);
+    const fichesMastered = fichesMat.filter(f => f.mastered).length;
+
+    const card = document.createElement('div');
+    card.className = 'subject-card';
+    card.style.setProperty('--card-color', s.color);
+    card.querySelector ? null : card.innerHTML = '';
+    card.innerHTML = `
+      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:${s.color};border-radius:14px 0 0 14px"></div>
+      <div class="subj-header">
+        <div>
+          <div class="subj-name" style="color:${s.color}">${s.name}</div>
+          <div class="subj-type">${s.type}</div>
+        </div>
+        <div class="subj-priority" style="color:${s.color}">P${s.priority}</div>
+      </div>
+      <div class="subj-progress-wrap">
+        <div class="subj-prog-label"><span>Progression révision</span><span class="subj-prog-pct">${pct}%</span></div>
+        <div class="subj-prog-bar"><div class="subj-prog-fill" style="width:${pct}%;background:${s.color}"></div></div>
+      </div>
+      <div class="subj-stats">
+        <div class="subj-stat">
+          <div class="subj-stat-val" style="color:${s.color}">${dones[key]}</div>
+          <div class="subj-stat-label">créneaux faits</div>
+        </div>
+        <div class="subj-stat">
+          <div class="subj-stat-val" style="color:${s.color}">${totals[key]}</div>
+          <div class="subj-stat-label">total prévus</div>
+        </div>
+        <div class="subj-stat">
+          <div class="subj-stat-val" style="color:${s.color}">${fichesMastered}/${fichesMat.length}</div>
+          <div class="subj-stat-label">fiches OK</div>
+        </div>
+      </div>
+      <div class="subj-exam-date">
+        <span style="color:${s.color}">⚡</span> Examen : ${s.examLabel}
+      </div>
+    `;
+    grid.appendChild(card);
+  }
+}
+
+// ============================================================
+// TIMER (POMODORO)
+// ============================================================
+
+let timerInterval = null;
+let timerRunning = false;
+let timerSeconds = 25 * 60;
+let timerTotal = 25 * 60;
+let timerMode = 'work'; // work | break
+let timerSubj = 'elec';
+let pomodoroCount = 0;
+const CIRCUMFERENCE = 722.57;
+
+function renderTimerSubjects() {
+  const container = document.getElementById('timer-subj-select');
+  container.innerHTML = '';
+  for (const [key, s] of Object.entries(SUBJECTS)) {
+    const btn = document.createElement('button');
+    btn.className = `timer-subj-btn ${key === timerSubj ? 'active' : ''}`;
+    btn.textContent = s.name;
+    btn.onclick = () => {
+      timerSubj = key;
+      document.querySelectorAll('.timer-subj-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('timer-subj-label').textContent = s.name;
+      document.getElementById('timer-ring').style.stroke = s.color;
+    };
+    container.appendChild(btn);
+  }
+  document.getElementById('timer-subj-label').textContent = SUBJECTS[timerSubj].name;
+  document.getElementById('timer-ring').style.stroke = SUBJECTS[timerSubj].color;
+  renderSessions();
+}
+
+function setPreset(min, el) {
+  if (timerRunning) return;
+  timerSeconds = min * 60;
+  timerTotal = min * 60;
+  updateTimerDisplay();
+  document.querySelectorAll('.timer-preset').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function toggleTimer() {
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('timer-play-btn').textContent = '▶';
+  } else {
+    timerRunning = true;
+    document.getElementById('timer-play-btn').textContent = '⏸';
+    timerInterval = setInterval(tickTimer, 1000);
+  }
+}
+
+function tickTimer() {
+  if (timerSeconds <= 0) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('timer-play-btn').textContent = '▶';
+    onTimerComplete();
+    return;
+  }
+  timerSeconds--;
+  updateTimerDisplay();
+}
+
+function onTimerComplete() {
+  if (timerMode === 'work') {
+    pomodoroCount++;
+    const duration = timerTotal / 60;
+    state.pomSessions = state.pomSessions || [];
+    state.pomSessions.push({ subj: timerSubj, duration, date: new Date().toISOString() });
+    save();
+    notify(`✓ Session ${SUBJECTS[timerSubj].name} terminée ! (+${duration} min)`, 'success');
+    renderSessions();
+    updateProgressUI();
+    // Auto break
+    timerMode = 'break';
+    const breakTime = pomodoroCount % 4 === 0 ? 15 : 5;
+    timerSeconds = breakTime * 60;
+    timerTotal = breakTime * 60;
+    document.getElementById('timer-mode-label').textContent = 'PAUSE ' + breakTime + 'MIN';
+    updateTimerDisplay();
+  } else {
+    timerMode = 'work';
+    timerSeconds = timerTotal;
+    document.getElementById('timer-mode-label').textContent = 'TRAVAIL';
+    notify('Pause terminée, reprise !', 'warning');
+    updateTimerDisplay();
+  }
+}
+
+function skipPhase() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  document.getElementById('timer-play-btn').textContent = '▶';
+  if (timerMode === 'work') {
+    onTimerComplete();
+  } else {
+    timerMode = 'work';
+    timerSeconds = timerTotal;
+    document.getElementById('timer-mode-label').textContent = 'TRAVAIL';
+    updateTimerDisplay();
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerMode = 'work';
+  document.getElementById('timer-play-btn').textContent = '▶';
+  document.getElementById('timer-mode-label').textContent = 'TRAVAIL';
+  timerSeconds = timerTotal;
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timerSeconds / 60);
+  const s = timerSeconds % 60;
+  document.getElementById('timer-display').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  const offset = CIRCUMFERENCE * (1 - timerSeconds / timerTotal);
+  document.getElementById('timer-ring').style.strokeDashoffset = offset;
+}
+
+function renderSessions() {
+  const list = document.getElementById('sessions-list');
+  const today = new Date().toISOString().slice(0, 10);
+  const todaySessions = (state.pomSessions || []).filter(s => s.date.startsWith(today));
+
+  if (todaySessions.length === 0) {
+    list.innerHTML = '<div class="empty-state" style="padding:16px 0;font-size:12px">Aucune session. Lance le timer !</div>';
+    return;
+  }
+
+  list.innerHTML = todaySessions.map(s => `
+    <div class="session-row">
+      <span class="session-subj" style="color:${SUBJECTS[s.subj]?.color || '#fff'}">${SUBJECTS[s.subj]?.name || s.subj}</span>
+      <span class="session-time">${s.duration} min — ${new Date(s.date).toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'})}</span>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// FICHES
+// ============================================================
+
+let currentFicheSubj = 'all';
+
+function renderFiches() {
+  renderFichesSidebar();
+  renderFichesList();
+}
+
+function renderFichesSidebar() {
+  const list = document.getElementById('fiches-subj-list');
+  list.innerHTML = `
+    <div class="fiches-subj-item ${currentFicheSubj === 'all' ? 'active' : ''}" onclick="filterFiches('all')">
+      <div class="fiches-dot" style="background:var(--text3)"></div>
+      <span class="fiches-subj-name">Toutes</span>
+      <span class="fiches-count">${(state.fiches||[]).length}</span>
+    </div>
+  `;
+
+  for (const [key, s] of Object.entries(SUBJECTS)) {
+    const count = (state.fiches || []).filter(f => f.subj === key).length;
+    const item = document.createElement('div');
+    item.className = `fiches-subj-item ${currentFicheSubj === key ? 'active' : ''}`;
+    item.onclick = () => filterFiches(key);
+    item.innerHTML = `
+      <div class="fiches-dot" style="background:${s.color}"></div>
+      <span class="fiches-subj-name">${s.name}</span>
+      <span class="fiches-count">${count}</span>
+    `;
+    list.appendChild(item);
+  }
+}
+
+function filterFiches(subj) {
+  currentFicheSubj = subj;
+  renderFichesSidebar();
+  renderFichesList();
+}
+
+function renderFichesList() {
+  const list = document.getElementById('fiches-list');
+  const fiches = (state.fiches || []).filter(f => currentFicheSubj === 'all' || f.subj === currentFicheSubj);
+
+  if (fiches.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">◪</div><div class="empty-state-text">Aucune fiche. Crée ta première fiche !</div></div>';
+    return;
+  }
+
+  list.innerHTML = fiches.map((f, i) => {
+    const s = SUBJECTS[f.subj];
+    return `
+      <div class="fiche-card ${f.revealed ? 'revealed' : ''}" id="fiche-${f.id}">
+        <div class="fiche-front">
+          <div class="fiche-num" style="color:${s?.color||'#fff'}">Fiche ${i+1} · ${s?.name || f.subj} ${f.mastered ? '· <span style="color:var(--green)">✓ Maîtrisé</span>' : ''}</div>
+          <div class="fiche-question">${f.question}</div>
+          <div class="fiche-reveal-btn" onclick="toggleFiche('${f.id}')">▶ ${f.revealed ? 'Masquer la réponse' : 'Voir la réponse'}</div>
+        </div>
+        <div class="fiche-answer">
+          <div class="fiche-answer-content">${f.answer}</div>
+          <div class="fiche-actions">
+            <button class="fiche-btn ok" onclick="masteredFiche('${f.id}', true)">✓ Je maîtrise</button>
+            <button class="fiche-btn nok" onclick="masteredFiche('${f.id}', false)">✗ À revoir</button>
+            <button class="fiche-btn" onclick="deleteFiche('${f.id}')" style="color:var(--text3)">🗑 Supprimer</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function addFiche() {
+  const q = document.getElementById('fiche-question').value.trim();
+  const a = document.getElementById('fiche-answer').value.trim();
+  const subj = document.getElementById('fiche-subj-select').value;
+
+  if (!q || !a) { notify('Remplis la question et la réponse !', 'warning'); return; }
+
+  state.fiches = state.fiches || [];
+  state.fiches.push({ id: Date.now().toString(), subj, question: q, answer: a, mastered: false, revealed: false });
+  save();
+  document.getElementById('fiche-question').value = '';
+  document.getElementById('fiche-answer').value = '';
+  renderFiches();
+  notify('Fiche ajoutée ✓', 'success');
+  updateProgressUI();
+}
+
+function toggleFiche(id) {
+  const f = (state.fiches || []).find(f => f.id === id);
+  if (f) { f.revealed = !f.revealed; save(); renderFichesList(); }
+}
+
+function masteredFiche(id, val) {
+  const f = (state.fiches || []).find(f => f.id === id);
+  if (f) { f.mastered = val; save(); renderFichesList(); updateProgressUI(); notify(val ? 'Super ! Fiche maîtrisée ✓' : 'Noté, à réviser encore', val ? 'success' : 'warning'); }
+}
+
+function deleteFiche(id) {
+  state.fiches = (state.fiches || []).filter(f => f.id !== id);
+  save();
+  renderFiches();
+  updateProgressUI();
+}
+
+// ============================================================
+// NOTES
+// ============================================================
+
+function renderNotes() {
+  const list = document.getElementById('notes-list-items');
+  state.notes = state.notes || [];
+
+  if (state.notes.length === 0) {
+    list.innerHTML = '<div class="empty-state" style="padding:20px;font-size:12px">Aucune note</div>';
+    return;
+  }
+
+  list.innerHTML = state.notes.map(n => `
+    <div class="note-item ${state.currentNoteId === n.id ? 'active' : ''}" onclick="openNote('${n.id}')">
+      <div class="note-item-title">${n.title || 'Sans titre'}</div>
+      <div class="note-item-preview">${(n.body || '').slice(0, 60)}</div>
+      <div class="note-item-date">${new Date(n.date).toLocaleDateString('fr-FR')}</div>
+    </div>
+  `).join('');
+
+  if (state.currentNoteId) openNote(state.currentNoteId, false);
+}
+
+function addNote() {
+  const note = { id: Date.now().toString(), title: '', body: '', subj: '', date: new Date().toISOString() };
+  state.notes = state.notes || [];
+  state.notes.unshift(note);
+  state.currentNoteId = note.id;
+  save();
+  renderNotes();
+  document.getElementById('note-title').focus();
+}
+
+function openNote(id, render = true) {
+  state.currentNoteId = id;
+  const note = state.notes.find(n => n.id === id);
+  if (!note) return;
+  document.getElementById('note-title').value = note.title || '';
+  document.getElementById('note-body').value = note.body || '';
+  document.getElementById('note-subj').value = note.subj || '';
+  if (render) renderNotes();
+}
+
+function saveCurrentNote() {
+  if (!state.currentNoteId) return;
+  const note = state.notes.find(n => n.id === state.currentNoteId);
+  if (!note) return;
+  note.title = document.getElementById('note-title').value;
+  note.body = document.getElementById('note-body').value;
+  note.subj = document.getElementById('note-subj').value;
+  note.date = new Date().toISOString();
+  save();
+  // update list item
+  const item = document.querySelector(`.note-item.active .note-item-title`);
+  if (item) item.textContent = note.title || 'Sans titre';
+}
+
+function deleteCurrentNote() {
+  if (!state.currentNoteId) return;
+  if (!confirm('Supprimer cette note ?')) return;
+  state.notes = state.notes.filter(n => n.id !== state.currentNoteId);
+  state.currentNoteId = null;
+  document.getElementById('note-title').value = '';
+  document.getElementById('note-body').value = '';
+  save();
+  renderNotes();
+}
+
+// ============================================================
+// NOTIFY
+// ============================================================
+
+let notifTimer = null;
+function notify(msg, type = 'success') {
+  const el = document.getElementById('notif');
+  el.textContent = msg;
+  el.className = `notif show ${type}`;
+  clearTimeout(notifTimer);
+  notifTimer = setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+
+function init() {
+  load();
+  updateDate();
+  updateCountdown();
+  updateNextExam();
+  updateProgressUI();
+  renderDashboard();
+  setInterval(updateCountdown, 1000);
+  setInterval(updateDate, 60000);
+}
+
+init();
+</script>
+</body>
+</html>
