@@ -1359,6 +1359,7 @@ const PLANNING = [
 
 let state = {
   done: {},       // slotId -> bool
+  openDays: {},
   fiches: [],     // { id, subj, question, answer, mastered }
   notes: [],      // { id, title, body, subj, date }
   pomSessions: [],// { subj, duration, date }
@@ -1476,6 +1477,7 @@ function subjLabel(subj) {
 }
 
 function buildDayCard(d, open = false) {
+  if (state.openDays[d.id] !== undefined) open = state.openDays[d.id];
   const div = document.createElement('div');
   const doneCount = d.slots.filter(s => s.subj !== 'break' && state.done[s.id]).length;
   const totalWork = d.slots.filter(s => s.subj !== 'break').length;
@@ -1524,7 +1526,10 @@ function buildSlotRow(sl) {
 }
 
 function toggleDay(id) {
-  document.getElementById('day-' + id).classList.toggle('open');
+  const card = document.getElementById('day-' + id);
+  const isOpen = card.classList.toggle('open');
+  state.openDays[id] = isOpen;
+  save();
 }
 
 function toggleSlot(id) {
