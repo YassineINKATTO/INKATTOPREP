@@ -1057,7 +1057,7 @@ select.form-input option { background: var(--bg3); }
       <div class="planning-section">
         <div class="section-head">
           <div class="section-badge badge-prep">Phase 1</div>
-          <div class="section-title">Préparation — 28 Nov → 4 Déc</div>
+          <div class="section-title">Préparation — 28 Mai → 4 Juin</div>
         </div>
         <div id="prep-days"></div>
       </div>
@@ -1065,7 +1065,7 @@ select.form-input option { background: var(--bg3); }
       <div class="planning-section">
         <div class="section-head">
           <div class="section-badge badge-exam">Phase 2</div>
-          <div class="section-title">Examens — 5 Déc → 11 Déc</div>
+          <div class="section-title">Examens — 5 Juin → 11 Juin</div>
         </div>
         <div id="exam-days"></div>
       </div>
@@ -1206,19 +1206,19 @@ select.form-input option { background: var(--bg3); }
 // ============================================================
 
 const SUBJECTS = {
-  elec:    { name: 'Électronique',         color: '#4db8ff', priority: 1, type: 'Cours + TD + Exams',         examDay: '2025-12-10', examLabel: 'Mer 10 Déc' },
-  fluides: { name: 'Mécanique de fluides', color: '#3ecf8e', priority: 2, type: 'Résumé cours + TD + Exams',  examDay: '2025-12-08', examLabel: 'Lun 8 Déc' },
-  bureau:  { name: 'Bureau',               color: '#a594ff', priority: 3, type: 'TD + Exams',                 examDay: '2025-12-09', examLabel: 'Mar 9 Déc' },
-  stats:   { name: 'Mod. Statistiques',    color: '#f5c542', priority: 4, type: 'Résumé cours + TD + Exams',  examDay: '2025-12-05', examLabel: 'Ven 5 Déc' },
-  metal:   { name: 'Mat. Métalliques',     color: '#ff8c42', priority: 5, type: 'TD + Exams',                 examDay: '2025-12-11', examLabel: 'Jeu 11 Déc' },
-  java:    { name: 'Java',                 color: '#50fa7b', priority: 6, type: 'TD + Exams',                 examDay: '2025-12-10', examLabel: 'Mer 10 Déc' },
-  ro:      { name: 'RO',                   color: '#ffb347', priority: 7, type: 'TD + Exams',                 examDay: '2025-12-06', examLabel: 'Sam 6 Déc' },
-  compo:   { name: 'Mat. Composites',      color: '#ff6b9d', priority: 8, type: 'TD + Exams',                 examDay: '2025-12-11', examLabel: 'Jeu 11 Déc' },
+  elec:    { name: 'Électronique',         color: '#4db8ff', priority: 1, type: 'Cours + TD + Exams',         examDay: '2026-12-10', examLabel: 'Mer 10 Juin' },
+  fluides: { name: 'Mécanique de fluides', color: '#3ecf8e', priority: 2, type: 'Résumé cours + TD + Exams',  examDay: '2026-12-08', examLabel: 'Lun 8 Juin' },
+  bureau:  { name: 'Bureau',               color: '#a594ff', priority: 3, type: 'TD + Exams',                 examDay: '2026-12-09', examLabel: 'Mar 9 Juin' },
+  stats:   { name: 'Mod. Statistiques',    color: '#f5c542', priority: 4, type: 'Résumé cours + TD + Exams',  examDay: '2026-12-05', examLabel: 'Ven 5 Juin' },
+  metal:   { name: 'Mat. Métalliques',     color: '#ff8c42', priority: 5, type: 'TD + Exams',                 examDay: '2026-12-11', examLabel: 'Jeu 11 Juin' },
+  java:    { name: 'Java',                 color: '#50fa7b', priority: 6, type: 'TD + Exams',                 examDay: '2026-12-10', examLabel: 'Mer 10 Juin' },
+  ro:      { name: 'RO',                   color: '#ffb347', priority: 7, type: 'TD + Exams',                 examDay: '2026-12-06', examLabel: 'Sam 6 Juin' },
+  compo:   { name: 'Mat. Composites',      color: '#ff6b9d', priority: 8, type: 'TD + Exams',                 examDay: '2026-12-11', examLabel: 'Jeu 11 Juin' },
 };
 
 const PLANNING = [
   // --- PHASE PRÉPA ---
-  { id: 'd28', date: '2025-11-28', num: '28', day: 'Jeudi', phase: 'prep', slots: [
+  { id: 'd28', date: '2026-05-28', num: '28', day: 'Jeudi', phase: 'prep', slots: [
     { id: 's28_1', time: '7h00–8h00',   subj: 'break',   task: 'Petit déjeuner + organisation', detail: 'Prépare fiches, planning imprimé' },
     { id: 's28_2', time: '8h30–10h30',  subj: 'elec',    task: 'Électronique — Cours complet', detail: 'Lecture + résumé chapitre par chapitre' },
     { id: 's28_3', time: '10h30–12h30', subj: 'elec',    task: 'Électronique — Suite cours', detail: 'Formules clés → fiche mémo' },
@@ -1229,7 +1229,7 @@ const PLANNING = [
     { id: 's28_8', time: '19h30–21h00', subj: 'fluides', task: 'Mécanique fluides — TD', detail: 'Exercices résolus' },
     { id: 's28_9', time: '22h30–23h30', subj: 'break',   task: 'Dîner + relecture légère', detail: 'Fiches mémo uniquement' },
   ]},
-  { id: 'd29', date: '2025-11-29', num: '29', day: 'Vendredi', phase: 'prep', slots: [
+  { id: 'd29', date: '2026-05-29', num: '29', day: 'Vendredi', phase: 'prep', slots: [
     { id: 's31_1', time: '8h30–10h30',  subj: 'bureau',  task: 'Bureau — TD', detail: 'Études de marché, bilans' },
     { id: 's31_2', time: '10h30–12h30', subj: 'bureau',  task: 'Bureau — TD', detail: 'Gestion de projet, exercices' },
     { id: 's31_3', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause', detail: '' },
@@ -1239,7 +1239,7 @@ const PLANNING = [
     { id: 's31_7', time: '19h30–21h00', subj: 'break',  task: 'Famille', detail: '' },
     { id: 's31_8', time: '21h00–23h00', subj: 'java',  task: 'JAVA — Revision', detail: 'Relis fiches, visualise l\'examen' },
   ]},
-  { id: 'd30', date: '2025-11-30', num: '30', day: 'Samedi', phase: 'prep', slots: [
+  { id: 'd30', date: '2026-05-30', num: '30', day: 'Samedi', phase: 'prep', slots: [
     { id: 's30_1', time: '8h30–10h30',  subj: 'metal',   task: 'Mat. Métalliques — TD', detail: 'Propriétés mécaniques' },
     { id: 's30_2', time: '10h30–12h30', subj: 'metal',   task: 'Mat. Métalliques — TD', detail: 'Diagrammes fer-carbone' },
     { id: 's30_3', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause', detail: '' },
@@ -1249,7 +1249,7 @@ const PLANNING = [
     { id: 's30_7', time: '19h30–21h00', subj: 'compo',   task: 'Mat. Composites — TD', detail: 'Exercices de base' },
     { id: 's30_8', time: '21h00–23h00', subj: 'compo',   task: 'Mat. Composites — TD', detail: 'Loi des mélanges' },
   ]},
-  { id: 'd31', date: '2025-11-31', num: '31', day: 'Dimanche', phase: 'prep', slots: [
+  { id: 'd31', date: '2026-05-31', num: '31', day: 'Dimanche', phase: 'prep', slots: [
     { id: 's29_1', time: '8h30–10h30',  subj: 'bureau',    task: 'Bureau - TD engrenages', detail: 'Exercices examen années précédentes' },
     { id: 's29_2', time: '10h30–12h30', subj: 'bureau',    task: 'Bureau - TD accouplements', detail: 'Identifie tes points faibles' },
     { id: 's29_3', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause', detail: '' },
@@ -1259,7 +1259,7 @@ const PLANNING = [
     { id: 's29_7', time: '19h30–21h00', subj: 'stats',   task: 'Mod. Statistiques — Cours + TD', detail: 'Cours + Exercices types' },
     { id: 's29_8', time: '21h00–23h00', subj: 'stats',   task: 'Mod. Statistiques — Cours+ TD', detail: 'Exercices types' },
   ]},
-  { id: 'd1', date: '2025-12-01', num: '1', day: 'Lundi', phase: 'prep', slots: [
+  { id: 'd1', date: '2026-06-01', num: '1', day: 'Lundi', phase: 'prep', slots: [
     { id: 's1_1', time: '8h30–10h30',  subj: 'elec',    task: 'Mod. Statistiques — Cours', detail: 'Creer fiche de synthese' },
     { id: 's1_2', time: '10h30–12h30', subj: 'elec',    task: 'Mod. Statistiques — TD', detail: 'Exercices types' },
     { id: 's1_3', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + repos mental', detail: 'Pas de révision pendant le repas' },
@@ -1269,7 +1269,7 @@ const PLANNING = [
     { id: 's1_7', time: '19h30–21h00', subj: 'fluides', task: 'Mécanique fluides — Finalisation', detail: 'Mémorise toutes les formules' },
     { id: 's1_8', time: '21h00–22h30', subj: 'fluides',    task: 'Mécanique fluides — Finalisation', detail: 'Relis fiches de formules' },
   ]},
-  { id: 'd2', date: '2025-12-02', num: '2', day: 'Mardi', phase: 'prep', slots: [
+  { id: 'd2', date: '2026-06-02', num: '2', day: 'Mardi', phase: 'prep', slots: [
     { id: 's2_1', time: '8h30–10h30',  subj: 'stats', task: 'Mod. Statistiques — TD', detail: 'Exercices types + points faibles' },
     { id: 's2_2', time: '10h30–12h30', subj: 'stats', task: 'Mod. Statistiques — Sujet', detail: 'Sujet complet en conditions réelles' },
     { id: 's2_3', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause', detail: '' },
@@ -1279,7 +1279,7 @@ const PLANNING = [
     { id: 's2_7', time: '19h30–21h00', subj: 'ro',      task: 'RO — TD', detail: 'Méthodes graphiques' },
     { id: 's2_8', time: '21h00–23h00', subj: 'ro',      task: 'RO — Révision', detail: 'Fiches + formules' },
   ]},
-  { id: 'd3', date: '2025-12-03', num: '3', day: 'Mercredi', phase: 'prep', slots: [
+  { id: 'd3', date: '2026-06-03', num: '3', day: 'Mercredi', phase: 'prep', slots: [
     { id: 's3_1', time: '8h30–10h30',  subj: 'ro',   task: 'RO — TD + Exams', detail: 'Exercices pratiques' },
     { id: 's3_2', time: '10h30–12h30', subj: 'ro',   task: 'RO — TD + Exams ', detail: '' },
     { id: 's3_3', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause', detail: '' },
@@ -1289,7 +1289,7 @@ const PLANNING = [
     { id: 's3_7', time: '19h30–21h00', subj: 'stats',    task: 'Mod. Statistiques — TD', detail: '' },
     { id: 's3_8', time: '21h00–23h00', subj: 'stats',   task: 'Mod. Statistiques — TD', detail: '' },
   ]},
-  { id: 'd4', date: '2025-12-04', num: '4', day: 'Jeudi', phase: 'prep', slots: [
+  { id: 'd4', date: '2026-06-04', num: '4', day: 'Jeudi', phase: 'prep', slots: [
     { id: 's4_1', time: '8h30–12h30',  subj: 'break',   task: 'TRIP (cours imposé)', detail: 'Sois présent et attentif' },
     { id: 's4_2', time: '13h00–14h30', subj: 'break',   task: 'Déjeuner + pause', detail: '' },
     { id: 's4_6', time: '14h30–16h30', subj: 'stats',    task: 'Mod. Statistiques — Révision', detail: '' },
@@ -1299,40 +1299,40 @@ const PLANNING = [
     { id: 's4_4', time: '21h30–22h30', subj: 'stats',   task: 'Mod. Statistiques — Formules clés', detail: 'Visualise l\'examen' },
   ]},
   // --- PHASE EXAMEN ---
-  { id: 'd5', date: '2025-12-05', num: '5', day: 'Vendredi', phase: 'exam', isExam: true, examLabel: '⚡ Examen : Mod. Statistiques', slots: [
+  { id: 'd5', date: '2026-06-05', num: '5', day: 'Vendredi', phase: 'exam', isExam: true, examLabel: '⚡ Examen : Mod. Statistiques', slots: [
     { id: 's5_1', time: '8h30–10h30',  subj: 'exam',    task: '📋 EXAMEN — Mod. Statistiques', detail: 'Relis fiches 30 min avant, reste calme' },
     { id: 's5_2', time: '10h30–13h00', subj: 'break',   task: 'Décompresse + déjeuner', detail: 'C\'est terminé, tourne la page' },
     { id: 's5_3', time: '13h00–16h30', subj: 'fluides', task: 'Mécanique fluides — Révision', detail: 'Fiches + 1 sujet chrono' },
     { id: 's5_4', time: '16h30–17h00', subj: 'break',   task: 'Pause + goûter', detail: 'Repos mérité' },
     { id: 's5_5', time: '19h30–23h00', subj: 'ro',   task: 'RO — Révision finale', detail: 'Fiches + exercices clés' },
   ]},
-  { id: 'd6', date: '2025-12-06', num: '6', day: 'Samedi', phase: 'exam', isExam: true, examLabel: '⚡ Examen : RO', slots: [
+  { id: 'd6', date: '2026-06-06', num: '6', day: 'Samedi', phase: 'exam', isExam: true, examLabel: '⚡ Examen : RO', slots: [
     { id: 's6_1', time: '8h30–10h30',  subj: 'exam',    task: '📋 EXAMEN — RO', detail: 'Fiches uniquement ce matin' },
     { id: 's6_2', time: '10h30–13h00', subj: 'break',   task: 'Pause + déjeuner', detail: '' },
     { id: 's6_3', time: '13h00–16h30', subj: 'elec',    task: 'Électronique — Révision flash', detail: 'Fiches + formules essentielles' },
     { id: 's6_4', time: '16h30–19h30', subj: 'break',   task: 'Goûter + pause totale', detail: 'Dors si possible' },
     { id: 's6_5', time: '19h30–23h00', subj: 'fluides', task: 'Mécanique fluides — Dernier tour', detail: 'Fiches, formules, visualisation' },
   ]},
-  { id: 'd7', date: '2025-12-07', num: '7', day: 'Dimanche', phase: 'exam', isFree: true, slots: [
+  { id: 'd7', date: '2026-06-07', num: '7', day: 'Dimanche', phase: 'exam', isFree: true, slots: [
     { id: 's7_1', time: '9h00–12h00', subj: 'elec',    task: 'Révision Électronique', detail: 'Fiches, reviser les exercices faits' },
     { id: 's7_2', time: '12h00–14h00', subj: 'break',   task: 'Déjeuner + repos total', detail: 'Détends-toi, c\'est la veille de l\'examen' },
     { id: 's7_3', time: '14h00–17h30', subj: 'fluides', task: 'Relecture Mécanique fluides', detail: '15 min par grand thème max cours, puis revision des cas faits.' },
   ]},
-  { id: 'd8', date: '2025-12-08', num: '8', day: 'Lundi', phase: 'exam', isExam: true, examLabel: '⚡ Examen : Mécanique de fluides', slots: [
+  { id: 'd8', date: '2026-06-08', num: '8', day: 'Lundi', phase: 'exam', isExam: true, examLabel: '⚡ Examen : Mécanique de fluides', slots: [
     { id: 's8_1', time: '8h30–10h30',  subj: 'exam',    task: '📋 EXAMEN — Mécanique de fluides', detail: 'Fiches 30 min avant, sois calme' },
     { id: 's8_2', time: '10h30–13h00', subj: 'break',   task: 'Pause + déjeuner', detail: 'Ne ressasse pas, tourne la page' },
     { id: 's8_3', time: '13h00–16h30', subj: 'metal',  task: 'Mat. Métalliques — Dernière révision', detail: 'Revision des cas de calculs.' },
     { id: 's8_4', time: '16h30–18h30', subj: 'break',   task: 'Pause + goûter', detail: '' },
     { id: 's8_5', time: '18h30–21h00', subj: 'bureau',   task: 'Bureau - Revision Finale', detail: 'Fiches + simulation rapide' },
   ]},
-  { id: 'd9', date: '2025-12-09', num: '9', day: 'Mardi', phase: 'exam', isExam: true, examLabel: '⚡ Examen : Bureau', slots: [
+  { id: 'd9', date: '2026-06-09', num: '9', day: 'Mardi', phase: 'exam', isExam: true, examLabel: '⚡ Examen : Bureau', slots: [
     { id: 's9_1', time: '8h30–14h30',  subj: 'break',    task: 'Pause déjeuner, lisez les fiches', detail: '' },
     { id: 's9_2', time: '14h30–15h30', subj: 'exam',   task: '📋 EXAMEN — Bureau', detail: 'Relis fiches avant l\'examen, reste concentré' },
     { id: 's9_3', time: '15h30–18h30', subj: 'elec',    task: 'Électronique — Révision finale', detail: 'Fiches, points faibles, formules' },
     { id: 's9_4', time: '19h00–19h30', subj: 'break',   task: 'Goûter', detail: '' },
     { id: 's9_5', time: '19h30–23h00', subj: 'java',    task: 'Java — Révision finale', detail: 'Programmes types, algorithmes clés' },
   ]},
-  { id: 'd10', date: '2025-12-10', num: '10', day: 'Mercredi', phase: 'exam', isExam: true, examLabel: '⚡ Examens : Java + Électronique', slots: [
+  { id: 'd10', date: '2026-06-10', num: '10', day: 'Mercredi', phase: 'exam', isExam: true, examLabel: '⚡ Examens : Java + Électronique', slots: [
     { id: 's10_1', time: '8h30–10h30',  subj: 'exam',   task: '📋 EXAMEN — Java', detail: 'Fiches 20 min avant' },
     { id: 's10_2', time: '10h30–14h30', subj: 'break',  task: 'Pause déjeuner, relis les fiches', detail: '' },
     { id: 's10_3', time: '14h30–16h00', subj: 'exam',   task: '📋 EXAMEN — Électronique', detail: 'Ta priorité n°1 — donne tout !' },
@@ -1340,7 +1340,7 @@ const PLANNING = [
     { id: 's10_5', time: '19h00–19h30', subj: 'break',  task: 'Goûter', detail: '' },
     { id: 's10_6', time: '19h30–23h00', subj: 'metal',  task: 'Mat. Métalliques — Dernière lecture', detail: 'Fiches seulement' },
   ]},
-  { id: 'd11', date: '2025-12-11', num: '11', day: 'Jeudi', phase: 'exam', isExam: true, examLabel: '⚡ Examens finaux : Mat. Métalliques + Mat. Composites', slots: [
+  { id: 'd11', date: '2026-06-11', num: '11', day: 'Jeudi', phase: 'exam', isExam: true, examLabel: '⚡ Examens finaux : Mat. Métalliques + Mat. Composites', slots: [
     { id: 's11_1', time: '8h30–10h30',  subj: 'exam',   task: '📋 EXAMEN — Mat. Métalliques', detail: 'Fiches 20 min avant' },
     { id: 's11_2', time: '10h30–14h30', subj: 'break',  task: 'Pause déjeuner, lisez les fiches', detail: '' },
     { id: 's11_3', time: '14h30–16h30', subj: 'exam',   task: '📋 EXAMEN — Mat. Composites', detail: 'Derniers examens' },
@@ -1414,7 +1414,7 @@ function updateDate() {
 }
 
 function updateCountdown() {
-  const firstExam = new Date('2025-12-05T08:30:00');
+  const firstExam = new Date('2026-06-05T08:30:00');
   const now = new Date();
   const diff = firstExam - now;
 
@@ -1438,12 +1438,12 @@ function updateCountdown() {
 function updateNextExam() {
   const now = new Date();
   const exams = [
-    { name: 'Mod. Statistiques', date: new Date('2025-12-05'), label: 'Vendredi 5 Décembre' },
-    { name: 'RO', date: new Date('2025-12-06'), label: 'Samedi 6 Décembre' },
-    { name: 'Mécanique de fluides', date: new Date('2025-12-08'), label: 'Lundi 8 Décembre' },
-    { name: 'Bureau', date: new Date('2025-12-09'), label: 'Mardi 9 Décembre' },
-    { name: 'Java + Électronique', date: new Date('2025-12-10'), label: 'Mercredi 10 Décembre' },
-    { name: 'Mat. Métalliques + Composites', date: new Date('2025-12-11'), label: 'Jeudi 11 Décembre' },
+    { name: 'Mod. Statistiques', date: new Date('2026-06-05'), label: 'Vendredi 5 Juin' },
+    { name: 'RO', date: new Date('2026-06-06'), label: 'Samedi 6 Juin' },
+    { name: 'Mécanique de fluides', date: new Date('2026-06-08'), label: 'Lundi 8 Juin' },
+    { name: 'Bureau', date: new Date('2026-06-09'), label: 'Mardi 9 Juin' },
+    { name: 'Java + Électronique', date: new Date('2026-06-10'), label: 'Mercredi 10 Juin' },
+    { name: 'Mat. Métalliques + Composites', date: new Date('2026-06-11'), label: 'Jeudi 11 Juin' },
   ];
 
   const next = exams.find(e => e.date >= now);
