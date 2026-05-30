@@ -1215,7 +1215,12 @@ const SUBJECTS = {
   ro:      { name: 'RO',                   color: '#ffb347', priority: 7, type: 'TD + Exams',                 examDay: '2026-12-06', examLabel: 'Sam 6 Juin' },
   compo:   { name: 'Mat. Composites',      color: '#ff6b9d', priority: 8, type: 'TD + Exams',                 examDay: '2026-12-11', examLabel: 'Jeu 11 Juin' },
 };
-
+  
+function localDateStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+  
 const PLANNING = [
   // --- PHASE PRÉPA ---
   { id: 'd28', date: '2026-05-28', num: '28', day: 'Jeudi', phase: 'prep', slots: [
@@ -1551,7 +1556,7 @@ function renderPlanning() {
   prep.innerHTML = '';
   exam.innerHTML = '';
 
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDateStr();
 
   for (const d of PLANNING) {
     const card = buildDayCard(d, d.date === today);
@@ -1572,7 +1577,7 @@ function renderDashboard() {
 }
 
 function renderTodaySlots() {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDateStr();
   const todayPlan = PLANNING.find(d => d.date === today);
   const container = document.getElementById('today-slots');
   const title = document.getElementById('today-title');
@@ -1847,9 +1852,9 @@ function updateTimerDisplay() {
 
 function renderSessions() {
   const list = document.getElementById('sessions-list');
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDateStr();
   const todaySessions = (state.pomSessions || []).filter(s => s.date.startsWith(today));
-
+  
   if (todaySessions.length === 0) {
     list.innerHTML = '<div class="empty-state" style="padding:16px 0;font-size:12px">Aucune session. Lance le timer !</div>';
     return;
