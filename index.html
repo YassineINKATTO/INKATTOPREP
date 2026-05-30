@@ -1206,14 +1206,14 @@ select.form-input option { background: var(--bg3); }
 // ============================================================
 
 const SUBJECTS = {
-  elec:    { name: 'Électronique',         color: '#4db8ff', priority: 1, type: 'Cours + TD + Exams',         examDay: '2026-12-10', examLabel: 'Mer 10 Juin' },
-  fluides: { name: 'Mécanique de fluides', color: '#3ecf8e', priority: 2, type: 'Résumé cours + TD + Exams',  examDay: '2026-12-08', examLabel: 'Lun 8 Juin' },
-  bureau:  { name: 'Bureau',               color: '#a594ff', priority: 3, type: 'TD + Exams',                 examDay: '2026-12-09', examLabel: 'Mar 9 Juin' },
-  stats:   { name: 'Mod. Statistiques',    color: '#f5c542', priority: 4, type: 'Résumé cours + TD + Exams',  examDay: '2026-12-05', examLabel: 'Ven 5 Juin' },
-  metal:   { name: 'Mat. Métalliques',     color: '#ff8c42', priority: 5, type: 'TD + Exams',                 examDay: '2026-12-11', examLabel: 'Jeu 11 Juin' },
-  java:    { name: 'Java',                 color: '#50fa7b', priority: 6, type: 'TD + Exams',                 examDay: '2026-12-10', examLabel: 'Mer 10 Juin' },
-  ro:      { name: 'RO',                   color: '#ffb347', priority: 7, type: 'TD + Exams',                 examDay: '2026-12-06', examLabel: 'Sam 6 Juin' },
-  compo:   { name: 'Mat. Composites',      color: '#ff6b9d', priority: 8, type: 'TD + Exams',                 examDay: '2026-12-11', examLabel: 'Jeu 11 Juin' },
+  elec:    { name: 'Électronique',         color: '#4db8ff', priority: 1, type: 'Cours + TD + Exams',         examDay: '2026-06-10', examLabel: 'Mer 10 Juin' },
+  fluides: { name: 'Mécanique de fluides', color: '#3ecf8e', priority: 2, type: 'Résumé cours + TD + Exams',  examDay: '2026-06-08', examLabel: 'Lun 8 Juin' },
+  bureau:  { name: 'Bureau',               color: '#a594ff', priority: 3, type: 'TD + Exams',                 examDay: '2026-06-09', examLabel: 'Mar 9 Juin' },
+  stats:   { name: 'Mod. Statistiques',    color: '#f5c542', priority: 4, type: 'Résumé cours + TD + Exams',  examDay: '2026-06-05', examLabel: 'Ven 5 Juin' },
+  metal:   { name: 'Mat. Métalliques',     color: '#ff8c42', priority: 5, type: 'TD + Exams',                 examDay: '2026-06-11', examLabel: 'Jeu 11 Juin' },
+  java:    { name: 'Java',                 color: '#50fa7b', priority: 6, type: 'TD + Exams',                 examDay: '2026-06-10', examLabel: 'Mer 10 Juin' },
+  ro:      { name: 'RO',                   color: '#ffb347', priority: 7, type: 'TD + Exams',                 examDay: '2026-06-06', examLabel: 'Sam 6 Juin' },
+  compo:   { name: 'Mat. Composites',      color: '#ff6b9d', priority: 8, type: 'TD + Exams',                 examDay: '2026-06-11', examLabel: 'Jeu 11 Juin' },
 };
   
 function localDateStr() {
@@ -1444,12 +1444,12 @@ function updateCountdown() {
 function updateNextExam() {
   const now = new Date();
   const exams = [
-    { name: 'Mod. Statistiques', date: new Date('2026-06-05'), label: 'Vendredi 5 Juin' },
-    { name: 'RO', date: new Date('2026-06-06'), label: 'Samedi 6 Juin' },
-    { name: 'Mécanique de fluides', date: new Date('2026-06-08'), label: 'Lundi 8 Juin' },
-    { name: 'Bureau', date: new Date('2026-06-09'), label: 'Mardi 9 Juin' },
-    { name: 'Java + Électronique', date: new Date('2026-06-10'), label: 'Mercredi 10 Juin' },
-    { name: 'Mat. Métalliques + Composites', date: new Date('2026-06-11'), label: 'Jeudi 11 Juin' },
+    { name: 'Mod. Statistiques', date: new Date('2026-06-05T12:00:00'), label: 'Vendredi 5 Juin' },
+    { name: 'RO', date: new Date('2026-06-06T12:00:00'), label: 'Samedi 6 Juin' },
+    { name: 'Mécanique de fluides', date: new Date('2026-06-08T12:00:00'), label: 'Lundi 8 Juin' },
+    { name: 'Bureau', date: new Date('2026-06-09T12:00:00'), label: 'Mardi 9 Juin' },
+    { name: 'Java + Électronique', date: new Date('2026-06-10T12:00:00'), label: 'Mercredi 10 Juin' },
+    { name: 'Mat. Métalliques + Composites', date: new Date('2026-06-11T12:00:00'), label: 'Jeudi 11 Juin' },
   ];
 
   const next = exams.find(e => e.date >= now);
